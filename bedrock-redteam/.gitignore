@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Vendored dependencies (recreate with: pip install -t app/vendor ...)
+app/vendor/
+
+# CDK
+cdk.out/
+.cdk.staging/
+
+# Evidence (large artifacts, keep README only)
+evidence/*/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db

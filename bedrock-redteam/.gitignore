@@ -14,8 +14,9 @@ app/vendor/
 cdk.out/
 .cdk.staging/
 
-# Evidence (large artifacts, keep README only)
+# Evidence (large artifacts, keep README and screenshots only)
 evidence/*/
+!evidence/screenshots/
 
 # IDE
 .vscode/

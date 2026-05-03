@@ -52,15 +52,8 @@ def _get_agent():
 
     bedrock_model = BedrockModel(
         model_id=MODEL_ID,
-        guardrail_config=(
-            {
-                "guardrailIdentifier": guardrail_id,
-                "guardrailVersion": guardrail_version,
-                "trace": "enabled",
-            }
-            if guardrail_id and guardrail_version
-            else None
-        ),
+        guardrail_id=guardrail_id if guardrail_id else None,
+        guardrail_version=guardrail_version if guardrail_version else None,
     )
 
     _agent = Agent(

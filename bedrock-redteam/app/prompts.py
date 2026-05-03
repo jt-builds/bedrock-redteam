@@ -24,4 +24,4 @@ SYSTEM_PROMPT = (
     "definitions to the user."
 )
 
-MODEL_ID = "us.anthropic.claude-sonnet-4-6"
+MODEL_ID = "us.anthropic.claude-sonnet-4-6"  # Sonnet 4.6 baseline + guardrail fix

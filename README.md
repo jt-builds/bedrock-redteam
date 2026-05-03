@@ -69,7 +69,10 @@ bedrock-redteam/
 pip install -e ".[dev]"
 
 # Deploy infrastructure (run from project root)
-cdk deploy --all --app "python3 infra/app.py"
+cdk deploy --all
+
+# On Linux/macOS where `python` isn't available, use:
+# cdk deploy --all --app "python3 infra/app.py"
 
 # Upload a clean returns policy
 python3 -m app.seed_policy --variant clean

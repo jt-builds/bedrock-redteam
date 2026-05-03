@@ -1,5 +1,5 @@
 {
-  "app": "python infra/app.py",
+  "app": "python3 infra/app.py",
   "context": {
     "@aws-cdk/core:stackRelativeExports": true
   }

@@ -68,18 +68,22 @@ bedrock-redteam/
 # Install dependencies
 pip install -e ".[dev]"
 
-# Deploy infrastructure
-cd infra && cdk deploy --all
+# Deploy infrastructure (run from project root)
+cdk deploy --all --app "python3 infra/app.py"
 
 # Upload a clean returns policy
-python -m app.seed_policy --variant clean
+python3 -m app.seed_policy --variant clean
 
 # Run all attacks
-python -m attacks.run_all
+python3 -m attacks.run_all
 
 # Run a single attack
-python -m attacks.run --payload unicode_tag
+python3 -m attacks.run --payload unicode_tag
 ```
+
+> **Note:** `app/vendor/` contains vendored dependencies for the AgentCore
+> code-zip deployment. These are bundled into the Lambda package at deploy time
+> and are not needed for local development (`pip install -e .` covers that).
 
 ## CDK Context
 

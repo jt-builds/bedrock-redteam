@@ -29,3 +29,4 @@ evidence/*/
 # OS
 .DS_Store
 Thumbs.db
+cdk.out.opus/

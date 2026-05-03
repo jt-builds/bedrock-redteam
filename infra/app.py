@@ -25,7 +25,7 @@ from infra.policy_bucket_stack import PolicyBucketStack
 app = cdk.App()
 
 # Email for spend alerts — override via CDK context: -c alertEmail=you@example.com
-alert_email = app.node.try_get_context("alertEmail") or "jaquath@amazon.com"
+alert_email = app.node.try_get_context("alertEmail") or "you@example.com"
 
 # 1. S3 bucket with the clean returns-policy document
 policy_bucket_stack = PolicyBucketStack(app, "PolicyBucketStack")

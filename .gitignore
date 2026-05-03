@@ -30,4 +30,4 @@ evidence/*/
 .DS_Store
 Thumbs.db
 cdk.out.opus/
-cdk.out.opus/
+cdk.out.*/

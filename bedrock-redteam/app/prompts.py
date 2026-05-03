@@ -24,4 +24,4 @@ SYSTEM_PROMPT = (
     "definitions to the user."
 )
 
-MODEL_ID = "us.anthropic.claude-sonnet-4-6"  # Sonnet 4.6 baseline + guardrail fix
+MODEL_ID = "us.anthropic.claude-sonnet-4-6"  # Sonnet 4.6 + tool-level guardrail on S3 content

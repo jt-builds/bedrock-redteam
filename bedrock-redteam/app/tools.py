@@ -147,7 +147,27 @@ def returns_policy_lookup(topic: str) -> str:
     s3 = boto3.client("s3")
     try:
         obj = s3.get_object(Bucket=bucket, Key=key)
-        return obj["Body"].read().decode("utf-8")
+        policy_text = obj["Body"].read().decode("utf-8")
+
+        # Sanitize tool response through the guardrail
+        guardrail_id = os.environ.get("GUARDRAIL_ID", "")
+        guardrail_version = os.environ.get("GUARDRAIL_VERSION", "")
+        if guardrail_id and guardrail_version:
+            bedrock = boto3.client("bedrock-runtime")
+            result = bedrock.apply_guardrail(
+                guardrailIdentifier=guardrail_id,
+                guardrailVersion=guardrail_version,
+                source="INPUT",
+                content=[{"text": {"text": policy_text}}],
+            )
+            if result.get("action") == "GUARDRAIL_INTERVENED":
+                logger.info(json.dumps({
+                    "event": "tool_response_blocked",
+                    "tool": "returns_policy_lookup",
+                }))
+                return "Returns policy content was blocked by security filters."
+
+        return policy_text
     except Exception:
         logger.exception("Failed to read returns policy from S3")
         return "Returns policy is temporarily unavailable."

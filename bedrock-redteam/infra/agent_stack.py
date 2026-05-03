@@ -275,8 +275,33 @@ class AgentStack(cdk.Stack):
         chat_resource = api.root.add_resource("chat")
         chat_resource.add_method("POST", apigw.LambdaIntegration(handler_fn))
 
+        # ── Expose resources for cross-stack references ─────────────
+        self._api = api
+        self._handler_fn = handler_fn
+        self._runtime_id = runtime_id
+        self._log_group = log_group
+
         # ── Outputs ───────────────────────────────────────────────────
         cdk.CfnOutput(self, "AgentRuntimeId", value=runtime_id)
         cdk.CfnOutput(self, "AgentRuntimeArn", value=runtime_arn)
         cdk.CfnOutput(self, "ApiEndpoint", value=api.url)
         cdk.CfnOutput(self, "LogGroupName", value=log_group.log_group_name)
+
+    # -- Public properties for cross-stack references ------------------
+
+    @property
+    def api(self) -> apigw.RestApi:
+        return self._api
+
+    @property
+    def handler_fn(self) -> lambda_.IFunction:
+        return self._handler_fn
+
+    @property
+    def runtime_id(self) -> str:
+        """CloudFormation token for the AgentCore Runtime ID."""
+        return self._runtime_id
+
+    @property
+    def log_group(self) -> logs.ILogGroup:
+        return self._log_group
